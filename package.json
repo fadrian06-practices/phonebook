@@ -27,11 +27,12 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "firefox 62"
     ],
     "development": [
       "last 1 chrome version",
-      "last 1 firefox version",
+      "firefox 62",
       "last 1 safari version"
     ]
   }
