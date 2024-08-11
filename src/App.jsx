@@ -14,13 +14,9 @@ const App = () => {
   }, [])
 
   const addPerson = (name, number) => {
-    setPersons(
-      persons.concat({
-        name,
-        number,
-        id: persons.length + 1
-      })
-    )
+    return axios
+      .post('http://localhost:3001/persons', { name, number })
+      .then(({ data }) => setPersons(persons.concat(data)))
   }
 
   const filteredPersons = filter

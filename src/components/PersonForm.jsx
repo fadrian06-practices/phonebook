@@ -14,9 +14,10 @@ const PersonForm = ({ persons, addPerson }) => {
       return alert(`${newName} is already added to phonebook`)
     }
 
-    addPerson(newName, newNumber)
-    setNewName('')
-    setNewNumber('')
+    addPerson(newName, newNumber).then(() => {
+      setNewName('')
+      setNewNumber('')
+    })
   }
 
   return (
