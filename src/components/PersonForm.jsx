@@ -14,7 +14,7 @@ const PersonForm = ({ persons, addPerson }) => {
       return alert(`${newName} is already added to phonebook`)
     }
 
-    addPerson(newName, newNumber).then(() => {
+    addPerson({ name: newName, number: newNumber }).then(() => {
       setNewName('')
       setNewNumber('')
     })
