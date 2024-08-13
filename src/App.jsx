@@ -25,6 +25,16 @@ const App = () => {
     setPersons(persons.filter(person => person.id !== id))
   }
 
+  const updatePerson = async person => {
+    const returnedPerson = await personService.update(person.id, person)
+
+    const newPersons = persons.map(savedPerson => {
+      return savedPerson.id === returnedPerson.id ? returnedPerson : savedPerson
+    })
+
+    setPersons(newPersons)
+  }
+
   const filteredPersons = filter
     ? persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
     : persons
@@ -34,7 +44,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={filter} onChange={handleFilterChange} />
       <h2>Add a new</h2>
-      <PersonForm persons={persons} addPerson={addPerson} />
+      <PersonForm persons={persons} addPerson={addPerson} updatePerson={updatePerson} />
       <h2>Numbers</h2>
       <Persons persons={filteredPersons} deletePerson={deletePerson} />
     </div>

@@ -19,5 +19,11 @@ export default {
     const response = await axios.delete(`${baseUrl}/${id}`)
 
     return response.data
+  },
+
+  async update(id, person) {
+    const response = await axios.put(`${baseUrl}/${id}`, person)
+
+    return response.data
   }
 }
