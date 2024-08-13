@@ -19,6 +19,12 @@ const App = () => {
     setPersons(persons.concat(returnedPerson))
   }
 
+  const deletePerson = async id => {
+    await personService.delete(id)
+
+    setPersons(persons.filter(person => person.id !== id))
+  }
+
   const filteredPersons = filter
     ? persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
     : persons
@@ -30,7 +36,7 @@ const App = () => {
       <h2>Add a new</h2>
       <PersonForm persons={persons} addPerson={addPerson} />
       <h2>Numbers</h2>
-      <Persons persons={filteredPersons} />
+      <Persons persons={filteredPersons} deletePerson={deletePerson} />
     </div>
   )
 }

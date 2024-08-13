@@ -13,5 +13,11 @@ export default {
     const response = await axios.post(baseUrl, newPerson)
 
     return response.data
+  },
+
+  async delete(id) {
+    const response = await axios.delete(`${baseUrl}/${id}`)
+
+    return response.data
   }
 }
