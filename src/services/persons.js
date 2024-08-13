@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/persons'
 
-export default {
+const personService = {
   async getAll() {
     const response = await axios.get(baseUrl)
 
@@ -27,3 +27,5 @@ export default {
     return response.data
   }
 }
+
+export default personService
