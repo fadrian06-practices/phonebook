@@ -9,6 +9,7 @@ const App = () => {
   const [persons, setPersons] = useState([])
   const [filter, setFilter] = useState('')
   const [notification, setNotification] = useState(null)
+  const [error, setError] = useState(null)
   const handleFilterChange = event => setFilter(event.target.value)
 
   useEffect(() => {
@@ -35,13 +36,19 @@ const App = () => {
   }
 
   const updatePerson = async person => {
-    const returnedPerson = await personService.update(person.id, person)
+    try {
+      const returnedPerson = await personService.update(person.id, person)
 
-    const newPersons = persons.map(savedPerson => {
-      return savedPerson.id === returnedPerson.id ? returnedPerson : savedPerson
-    })
+      const newPersons = persons.map(savedPerson => {
+        return savedPerson.id === returnedPerson.id ? returnedPerson : savedPerson
+      })
 
-    setPersons(newPersons)
+      setPersons(newPersons)
+    } catch {
+      setError(`Information of ${person.name} has already been removed from server`)
+
+      setTimeout(() => setError(null), 5000)
+    }
   }
 
   const filteredPersons = filter
@@ -51,7 +58,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notification} />
+      <Notification message={notification} type='success' />
+      <Notification message={error} type='error' />
       <Filter filter={filter} onChange={handleFilterChange} />
       <h2>Add a new</h2>
       <PersonForm persons={persons} addPerson={addPerson} updatePerson={updatePerson} />
